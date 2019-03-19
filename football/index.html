@@ -1,0 +1,76 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="UTF-8">
+  <style>
+    #gate {
+        cursor: pointer;
+        margin-bottom: 100px;
+        width: 83px;
+        height: 46px;
+    }
+
+    #ball {
+        cursor: pointer;
+        width: 40px;
+        height: 40px;
+        position: absolute;
+        /* top: 0;
+        left: 0; */
+    }
+  </style>
+</head>
+
+<body>
+
+  <p>Drag the ball.</p>
+
+  <img src="https://en.js.cx/clipart/soccer-gate.svg" id="gate" class="droppable">
+
+  <img src="https://en.js.cx/clipart/ball.svg" id="ball">
+
+  <script>
+    // let gate = document.getElementById('gate');
+    // let ball = document.getElementById('ball');
+
+    let gate = document.querySelector('#gate');
+    let ball = document.querySelector('#ball');
+
+    let mouseToBallLeft = 0;
+    let mouseToBallTop = 0;
+    canDrag = false;
+    ball.addEventListener('mousedown', (e)=> {
+        //打开开关
+        canDrag = true;
+        //视窗的宽高
+        let windowWidth = document.documentElement.clientWidth;
+        let windowHeight = document.documentElement.clientHeight;
+
+        mouseToBallLeft = e.clientX - ball.offsetLeft;
+        mouseToBallTop = e.clientY - ball.offsetTop;
+    }, false);
+
+    document.addEventListener('mousemove', (e)=> {
+        if (canDrag) {
+            let boxToLeft = e.clientX - mouseToBallLeft;
+            let boxToTop = e.clientY - mouseToBallTop;
+
+            ball.style.left = boxToLeft + 'px';
+            ball.style.top = boxToTop + 'px';
+        }
+    }, false);
+
+    document.addEventListener('mouseup', (e)=> {
+        canDrag = false;
+    }, false);
+
+    //防止拖动球的时候 浏览器自动下载图片
+    ball.ondragstart = function() {
+      return false;
+    };
+  </script>
+
+
+</body>
+</html>
