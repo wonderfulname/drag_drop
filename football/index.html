@@ -9,6 +9,7 @@
         margin-bottom: 100px;
         width: 83px;
         height: 46px;
+        background: white;
     }
 
     #ball {
@@ -58,6 +59,17 @@
 
             ball.style.left = boxToLeft + 'px';
             ball.style.top = boxToTop + 'px';
+
+            let gatePositionObj = gate.getBoundingClientRect();
+            let gateLeft = gatePositionObj.left;
+            let gateTop = gatePositionObj.top;
+            let gateRight = gatePositionObj.right;
+            let gateBottom = gatePositionObj.bottom;
+            if ((gateLeft < e.clientX && e.clientX < gateRight) && (gateTop < e.clientY && e.clientY < gateBottom)) {
+              gate.style.background = 'red';
+            } else {
+              gate.style.background = 'white';
+            }
         }
     }, false);
 
